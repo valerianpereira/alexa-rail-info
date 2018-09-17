@@ -72,7 +72,7 @@ const handlers = {
       });
       res.on("end", () => {
         body = JSON.parse(body);
-        let speechOutput = body.trains.length + ' trains cancelled. Here is the info for 1st 5 from the list ';
+        let speechOutput = 'Total ' + body.trains.length + ' trains cancelled. Here is the info for 1st 5 from the list. ';
         let stmt = '';
         let count = 0;
 
@@ -129,7 +129,7 @@ const handlers = {
       });
       res.on("end", () => {
         body = JSON.parse(body);
-        let speechOutput = body.trains.length + ' trains rescheduled. Here is the 1st 5 from the list. ';
+        let speechOutput = 'Total ' + body.trains.length + ' trains rescheduled. Here is the 1st 5 from the list. ';
         let stmt = '';
         let count = 0;
 
