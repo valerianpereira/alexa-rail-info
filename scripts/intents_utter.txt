@@ -1,0 +1,68 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "rail info",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "GetRailRescheduledIntent",
+                    "slots": [],
+                    "samples": [
+                        "rescheduled",
+                        "tell me the list of rescheduled trains",
+                        "any trains rescheduled ",
+                        "give me the list of rescheduled trains",
+                        "rescheduled trains"
+                    ]
+                },
+                {
+                    "name": "GetRailCancelledIntent",
+                    "slots": [],
+                    "samples": [
+                        "give the list of cancelled schedules",
+                        "cancelled trains",
+                        "give me the list of cancelled trains",
+                        "tell me the list of cancelled trains"
+                    ]
+                },
+                {
+                    "name": "GetRailPNRIntent",
+                    "slots": [
+                        {
+                            "name": "pnr",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "give me the status for pnr no {pnr}",
+                        "status for PNR no {pnr}",
+                        "give me the info for {pnr} no"
+                    ]
+                },
+                {
+                    "name": "EndSessionIntent",
+                    "slots": [],
+                    "samples": [
+                        "exit"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
