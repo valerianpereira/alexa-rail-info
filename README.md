@@ -8,3 +8,6 @@ Phase 2 of the skill will have more interactions for cancelled/rescheduled train
 # Adv
 
 With Railways being a most used mode of transport in India, this skills acts a boon to get list of cancelled/rescheduled trains and PNR status info on the go, instead of the browser or app dependency to check the status time and again. The skill will be enhanced further for more interactions and information like fare, seat availability, trains running between locations and a lot more.
+
+# Demo Video
+https://www.youtube.com/watch?v=iHo2rca2Gq4
