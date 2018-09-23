@@ -78,14 +78,14 @@ const handlers = {
 
                 body.trains.map(objj => {
                     if (count < 5) {
-                        stmt = "Train " + objj.name + " bearing number " + objj.number + " departing on " + objj.start_time + " from " + objj.source.name + " to " + objj.dest.name + " is cancelled.";
+                        stmt = "Train " + objj.name + " bearing number " + objj.number + " departing on " + objj.start_time + " from " + objj.source.name + " to " + objj.dest.name + " is cancelled. ";
                         speechOutput = speechOutput + stmt;
                     }
                     count++;
                 });
-                speechOutput = speechOutput + REPROMPTMSG;
+                speechOutput = speechOutput;
                 this.response.cardRenderer(SKILL_NAME, 'Cancelled Trains List');
-                this.response.speak(speechOutput).listen(REPROMPTMSG);
+                this.response.speak(speechOutput);
                 this.emit(':responseReady');
             });
         });
@@ -94,7 +94,7 @@ const handlers = {
         const varrNa = this.event.request.intent.slots.pnr.value;
         if (isNaN(this.event.request.intent.slots.pnr.value) || this.event.request.intent.slots.pnr.value.length != 10) {
             this.response.cardRenderer(SKILL_NAME, "Invalid PNR Number");
-            this.response.speak("Invalid PNR Number").listen('Some other info ?');
+            this.response.speak("Invalid PNR Number");
             this.emit(':responseReady');
         } else {
             let speechOutput = "";
@@ -114,9 +114,9 @@ const handlers = {
                         let stmmt = "Passenger Number " + passGr.no + " with status as " + spltStat[1] + " in " + shortCodes[spltStat[0]] + ". ";
                         speechOutput = speechOutput + stmmt;
                     });
-                    speechOutput = speechOutput + REPROMPTMSG;
+                    speechOutput = speechOutput;
                     this.response.cardRenderer(SKILL_NAME, 'PNR Status Info');
-                    this.response.speak(speechOutput).listen(REPROMPTMSG);
+                    this.response.speak(speechOutput);
                     this.emit(':responseReady');
                 });
             });
@@ -142,9 +142,9 @@ const handlers = {
                     }
                     count++;
                 });
-                speechOutput = speechOutput + REPROMPTMSG;
+                speechOutput = speechOutput;
                 this.response.cardRenderer(SKILL_NAME, 'Rescheduled Trains List');
-                this.response.speak(speechOutput).listen(REPROMPTMSG);
+                this.response.speak(speechOutput);
                 this.emit(':responseReady');
             });
         });
