@@ -74,17 +74,18 @@ const handlers = {
                 body = JSON.parse(body);
                 let speechOutput = 'Total ' + body.trains.length + ' trains cancelled. Here is the info for 1st 5 from the list. ';
                 let stmt = '';
+                let cardInfo = speechOutput + "\n\n";
                 let count = 0;
 
                 body.trains.map(objj => {
                     if (count < 5) {
                         stmt = "Train " + objj.name + " bearing number " + objj.number + " departing on " + objj.start_time + " from " + objj.source.name + " to " + objj.dest.name + " is cancelled. ";
                         speechOutput = speechOutput + stmt;
+                        cardInfo += stmt + "\n\n";
                     }
                     count++;
                 });
-                speechOutput = speechOutput;
-                this.response.cardRenderer(SKILL_NAME, 'Cancelled Trains List');
+                this.response.cardRenderer(SKILL_NAME + 'Cancelled Trains List', cardInfo);
                 this.response.speak(speechOutput);
                 this.emit(':responseReady');
             });
@@ -98,24 +99,34 @@ const handlers = {
             this.emit(':responseReady');
         } else {
             let speechOutput = "";
+
             https.get('https://hi5solutions.in/api/?action=pnrinfo&pnrno=' + varrNa, res => {
                 res.setEncoding("utf8");
                 let body = "";
+                let cardInfo = "";
+                let stmmt = "";
                 res.on("data", data => {
                     body += data;
                 });
                 res.on("end", () => {
                     body = JSON.parse(body);
+                    
+                    if (body.train.number == null) {
+                        speechOutput = 'Could not find info for the PNR Number ';
+                        cardInfo = 'Could not find info for the PNR Number ';
+                    } else {
+                        speechOutput = speechOutput + 'Info for PNR number ' + body.pnr + " for the train " + body.train.name + " bearing number " + body.train.number + " boarding from " + body.boarding_point.name + " with coach type " + shtName[body.journey_class.code] + " for " + body.passengers.length + " passengers is a follows. ";
+                        cardInfo = speechOutput + "\n\n";
 
-                    speechOutput = speechOutput + 'Info for PNR number ' + body.pnr + " for the train " + body.train.name + " bearing number " + body.train.number + " boarding from " + body.boarding_point.name + " with coach type " + shtName[body.journey_class.code] + " for " + body.passengers.length + " passengers is a follows. ";
-
-                    body.passengers.map(passGr => {
-                        let spltStat = passGr.current_status.split("/");
-                        let stmmt = "Passenger Number " + passGr.no + " with status as " + spltStat[1] + " in " + shortCodes[spltStat[0]] + ". ";
-                        speechOutput = speechOutput + stmmt;
-                    });
-                    speechOutput = speechOutput;
-                    this.response.cardRenderer(SKILL_NAME, 'PNR Status Info');
+                        body.passengers.map(passGr => {
+                            let spltStat = passGr.current_status.split("/");
+                            stmmt = "Passenger Number " + passGr.no + " seat is " + shortCodes[spltStat[0]] + ". ";
+                            speechOutput = speechOutput + stmmt;
+                            cardInfo += stmmt + "\n\n";
+                        });
+                    }
+                    
+                    this.response.cardRenderer(SKILL_NAME + 'PNR Status Info', cardInfo);
                     this.response.speak(speechOutput);
                     this.emit(':responseReady');
                 });
@@ -132,6 +143,7 @@ const handlers = {
             res.on("end", () => {
                 body = JSON.parse(body);
                 let speechOutput = 'Total ' + body.trains.length + ' trains rescheduled. Here is the 1st 5 from the list. ';
+                let cardInfo = speechOutput + "\n\n";
                 let stmt = '';
                 let count = 0;
 
@@ -139,11 +151,11 @@ const handlers = {
                     if (count < 5) {
                         stmt = "Train " + objj.name + " bearing number " + objj.number + " departing from " + objj.from_station.name + " to " + objj.to_station.name + " is rescheduled on " + objj.rescheduled_date + " at " + objj.rescheduled_time + " hours. Delay of " + objj.time_diff + " hours. ";
                         speechOutput = speechOutput + stmt;
+                        cardInfo += stmt + "\n\n";
                     }
                     count++;
                 });
-                speechOutput = speechOutput;
-                this.response.cardRenderer(SKILL_NAME, 'Rescheduled Trains List');
+                this.response.cardRenderer(SKILL_NAME + 'Rescheduled Trains List', cardInfo);
                 this.response.speak(speechOutput);
                 this.emit(':responseReady');
             });
