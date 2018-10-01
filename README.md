@@ -11,3 +11,7 @@ With Railways being a most used mode of transport in India, this skills acts a b
 
 # Demo Video
 https://www.youtube.com/watch?v=iHo2rca2Gq4
+
+# Donation 
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/ValerianPereira)
