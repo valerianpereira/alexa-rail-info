@@ -49,9 +49,9 @@
                         }
                     ],
                     "samples": [
-                        "give me the status for pnr no {pnr}",
-                        "status for PNR no {pnr}",
-                        "give me the info for {pnr} no"
+                        "give me the status for pnr number {pnr}",
+                        "status for PNR number {pnr}",
+                        "give me the info for {pnr} number"
                     ]
                 },
                 {
