@@ -28,6 +28,7 @@ const STOP_MESSAGE = 'Goodbye!';
 const GREETMSG = 'Hello, Would you like to know the cancelled trains, rescheduled trains or PNR status';
 const REPROMPTMSG = 'Would you like to hear some other info ?';
 
+// ShortCodes
 const shortCodes = {
     "GNWL": "General Waiting List",
     "RLWL": "Remote Location Waiting List",
@@ -41,6 +42,7 @@ const shortCodes = {
     "CNF": "Confirmed"
 };
 
+// Class Names - Short Names
 const shtName = {
     "SL": "Sleeper class",
     "CC": "AC Chair Car",
@@ -183,6 +185,7 @@ const handlers = {
     },
 };
 
+// Default block
 exports.handler = function (event, context, callback) {
     const alexa = Alexa.handler(event, context, callback);
     alexa.APP_ID = APP_ID;
