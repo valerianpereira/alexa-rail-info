@@ -64,7 +64,7 @@ const handlers = {
         this.emit(':responseReady');
     },
     'GetRailCancelledIntent': function () {
-        https.get('https://valerianpereira.in/api/?action=cancel', res => {
+        https.get('https://valerianpereira.in/api/railinfo/?action=cancel', res => {
             res.setEncoding("utf8");
             let body = "";
             res.on("data", data => {
@@ -100,7 +100,7 @@ const handlers = {
         } else {
             let speechOutput = "";
 
-            https.get('https://valerianpereira.in/api/?action=pnrinfo&pnrno=' + varrNa, res => {
+            https.get('https://valerianpereira.in/api/railinfo/?action=pnrinfo&pnrno=' + varrNa, res => {
                 res.setEncoding("utf8");
                 let body = "";
                 let cardInfo = "";
@@ -136,7 +136,7 @@ const handlers = {
         }
     },
     'GetRailRescheduledIntent': function () {
-        https.get('https://valerianpereira.in/api/?action=reschedule', res => {
+        https.get('https://valerianpereira.in/api/railinfo/?action=reschedule', res => {
             res.setEncoding("utf8");
             let body = "";
             res.on("data", data => {
