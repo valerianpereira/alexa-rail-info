@@ -28,7 +28,6 @@ const STOP_MESSAGE = 'Goodbye!';
 const GREETMSG = 'Hello, Would you like to know the cancelled trains, rescheduled trains or PNR status';
 const REPROMPTMSG = 'Would you like to hear some other info ?';
 
-// ShortCodes
 const shortCodes = {
     "GNWL": "General Waiting List",
     "RLWL": "Remote Location Waiting List",
@@ -42,7 +41,6 @@ const shortCodes = {
     "CNF": "Confirmed"
 };
 
-// Class Names - Short Names
 const shtName = {
     "SL": "Sleeper class",
     "CC": "AC Chair Car",
@@ -66,7 +64,7 @@ const handlers = {
         this.emit(':responseReady');
     },
     'GetRailCancelledIntent': function () {
-        https.get('https://hi5solutions.in/api/?action=cancel', res => {
+        https.get('https://valerianpereira.in/api/?action=cancel', res => {
             res.setEncoding("utf8");
             let body = "";
             res.on("data", data => {
@@ -102,7 +100,7 @@ const handlers = {
         } else {
             let speechOutput = "";
 
-            https.get('https://hi5solutions.in/api/?action=pnrinfo&pnrno=' + varrNa, res => {
+            https.get('https://valerianpereira.in/api/?action=pnrinfo&pnrno=' + varrNa, res => {
                 res.setEncoding("utf8");
                 let body = "";
                 let cardInfo = "";
@@ -113,6 +111,7 @@ const handlers = {
                 res.on("end", () => {
                     body = JSON.parse(body);
                     
+                    //if (body.response_code === 220) {
                     if (body.train.number == null) {
                         speechOutput = 'Could not find info for the PNR Number ';
                         cardInfo = 'Could not find info for the PNR Number ';
@@ -122,6 +121,7 @@ const handlers = {
 
                         body.passengers.map(passGr => {
                             let spltStat = passGr.current_status.split("/");
+                            //stmmt = "Passenger Number " + passGr.no + " with status as " + spltStat[1] + " in " + shortCodes[spltStat[0]] + ". ";
                             stmmt = "Passenger Number " + passGr.no + " seat is " + shortCodes[spltStat[0]] + ". ";
                             speechOutput = speechOutput + stmmt;
                             cardInfo += stmmt + "\n\n";
@@ -136,7 +136,7 @@ const handlers = {
         }
     },
     'GetRailRescheduledIntent': function () {
-        https.get('https://hi5solutions.in/api/?action=reschedule', res => {
+        https.get('https://valerianpereira.in/api/?action=reschedule', res => {
             res.setEncoding("utf8");
             let body = "";
             res.on("data", data => {
@@ -185,7 +185,6 @@ const handlers = {
     },
 };
 
-// Default block
 exports.handler = function (event, context, callback) {
     const alexa = Alexa.handler(event, context, callback);
     alexa.APP_ID = APP_ID;
